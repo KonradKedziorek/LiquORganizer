@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    container_name: liquorganizer-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootPassword
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=liquorganizer
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
