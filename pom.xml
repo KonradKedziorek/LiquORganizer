@@ -16,6 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <liquibase-core.version>4.16.0</liquibase-core.version>
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
     </properties>
     <dependencies>
         <dependency>
@@ -56,6 +57,12 @@
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase-core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

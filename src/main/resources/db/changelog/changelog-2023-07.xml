@@ -3,4 +3,88 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <changeSet id="add-role-table" author="Konrad Kędziorek">
+        <createTable tableName="role">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified_at" type="datetime" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-user-table" author="Konrad Kędziorek">
+        <createTable tableName="user">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified_at" type="datetime" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-user-roles-table" author="Konrad Kędziorek">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="uuid">
+                <constraints primaryKey="true"
+                             foreignKeyName="user_roles_user_id_fk"
+                             referencedTableName="user"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="roles_id" type="uuid">
+                <constraints primaryKey="true"
+                             foreignKeyName="user_roles_role_id_fk"
+                             referencedTableName="role"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
