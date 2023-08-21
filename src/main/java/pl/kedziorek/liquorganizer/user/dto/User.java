@@ -2,11 +2,13 @@ package pl.kedziorek.liquorganizer.user.dto;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import pl.kedziorek.liquorganizer.role.dto.Role;
+import pl.kedziorek.liquorganizer.role.repository.RoleRepo;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -66,6 +68,8 @@ public class User {
 
     private Boolean deleted;
 
+    private Boolean enabled;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,5 +107,20 @@ public class User {
                 modifiedAt,
                 deleted
         );
+    }
+
+    public static User mapRegistrationRequestToUser(RegistrationRequest request) {
+        return User.builder()
+                .id(UUID.randomUUID())
+                .name(request.getName())
+                .surname(request.getSurname())
+                .username(request.getUsername())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .phoneNumber(request.getPhoneNumber())
+                .createdAt(LocalDateTime.now())
+                .deleted(false)
+                .enabled(false)
+                .build();
     }
 }

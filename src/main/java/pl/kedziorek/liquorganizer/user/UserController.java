@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kedziorek.liquorganizer.config.security.AuthResponse;
 import pl.kedziorek.liquorganizer.config.security.Credentials;
 import pl.kedziorek.liquorganizer.config.security.service.AuthService;
+import pl.kedziorek.liquorganizer.user.dto.RegistrationRequest;
+import pl.kedziorek.liquorganizer.user.dto.User;
 import pl.kedziorek.liquorganizer.user.service.UserService;
 import pl.kedziorek.liquorganizer.utils.JwtUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import static pl.kedziorek.liquorganizer.utils.Cookie.buildCookie;
 
@@ -52,5 +55,10 @@ public class UserController {
         cookie.setDomain(domain);
         response.addCookie(cookie);
         return ResponseEntity.ok(cookie);
+    }
+
+    @PostMapping("/signUp")
+    public ResponseEntity<User> signUp(@Valid @RequestBody RegistrationRequest request) {
+        return ResponseEntity.ok().body(userService.signUp(request));
     }
 }

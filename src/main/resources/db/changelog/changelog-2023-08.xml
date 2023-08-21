@@ -59,4 +59,12 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="add-enabled-filed-in-user-entity" author="Konrad Kedziorek">
+        <addColumn tableName="user">
+            <column name="enabled" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
