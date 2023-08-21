@@ -17,6 +17,9 @@
         <java.version>11</java.version>
         <liquibase-core.version>4.16.0</liquibase-core.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <spring-security-config.version>5.7.4</spring-security-config.version>
+        <spring-security-web.version>5.7.4</spring-security-web.version>
+        <spring-boot-starter-security.version>2.3.3.RELEASE</spring-boot-starter-security.version>
     </properties>
     <dependencies>
         <dependency>
@@ -62,6 +65,22 @@
             <artifactId>validation-api</artifactId>
             <version>${javax.validation.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security-web.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security-config.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring-boot-starter-security.version}</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -1,0 +1,62 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-liquor-table" author="Konrad Kędziorek">
+        <createTable tableName="liquor">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="liquor_type" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_process" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alcohol_content" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_price" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="max_price" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_of_origin" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_friendly" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="location_info" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="additional_informations" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified_at" type="datetime" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,8 +1,9 @@
-package pl.kedziorek.liquorganizer.role;
+package pl.kedziorek.liquorganizer.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.kedziorek.liquorganizer.user.service.UserService;
 
 import javax.transaction.Transactional;
 
@@ -10,5 +11,5 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class RoleServiceImpl implements RoleService{
+public class UserServiceImpl implements UserService {
 }

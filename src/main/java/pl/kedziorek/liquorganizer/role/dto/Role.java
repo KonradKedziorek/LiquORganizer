@@ -1,4 +1,4 @@
-package pl.kedziorek.liquorganizer.role;
+package pl.kedziorek.liquorganizer.role.dto;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -63,5 +64,14 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, createdBy, createdAt, modifiedBy, modifiedAt, deleted);
+    }
+
+    public static Role mapToRole(RoleRequest roleRequest) {
+        return Role.builder()
+                .id(roleRequest.getId().equals("") ? UUID.randomUUID() : UUID.fromString(roleRequest.getId()))
+                .name(roleRequest.getName())
+                .createdBy(SecurityContextHolder.getContext().getAuthentication().getName())
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 }
