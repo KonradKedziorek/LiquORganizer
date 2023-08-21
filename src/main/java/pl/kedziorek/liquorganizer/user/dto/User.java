@@ -20,7 +20,7 @@ import java.util.*;
 @Getter
 @Setter
 @Builder
-@Table(name = "user")
+@Table(name = "user", schema = "public")
 public class User {
     @Id
     @GeneratedValue(generator = "uuid-hibernate-generator")

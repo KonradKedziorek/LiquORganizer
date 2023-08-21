@@ -20,6 +20,8 @@
         <spring-security-config.version>5.7.4</spring-security-config.version>
         <spring-security-web.version>5.7.4</spring-security-web.version>
         <spring-boot-starter-security.version>2.3.3.RELEASE</spring-boot-starter-security.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <java-jwt.version>4.2.0</java-jwt.version>
     </properties>
     <dependencies>
         <dependency>
@@ -80,8 +82,16 @@
             <artifactId>spring-boot-starter-security</artifactId>
             <version>${spring-boot-starter-security.version}</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
