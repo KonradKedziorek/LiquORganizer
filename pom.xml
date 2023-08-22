@@ -22,6 +22,7 @@
         <spring-boot-starter-security.version>2.3.3.RELEASE</spring-boot-starter-security.version>
         <jjwt.version>0.9.1</jjwt.version>
         <java-jwt.version>4.2.0</java-jwt.version>
+        <spring-boot-starter-mail.version>2.5.6</spring-boot-starter-mail.version>
     </properties>
     <dependencies>
         <dependency>
@@ -91,6 +92,11 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${java-jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>${spring-boot-starter-mail.version}</version>
         </dependency>
     </dependencies>
 

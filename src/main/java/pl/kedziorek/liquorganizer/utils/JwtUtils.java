@@ -33,6 +33,15 @@ public class JwtUtils {
                 .compact();
     }
 
+    public String generateJwtTokenToConfirmAccount(String newUsername) {
+        return Jwts.builder()
+                .setSubject(newUsername)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
     public String generateRefreshToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = new UserDetailsImpl();
         userPrincipal.setUsername(authentication.getName());

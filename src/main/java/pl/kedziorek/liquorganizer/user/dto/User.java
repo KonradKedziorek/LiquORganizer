@@ -2,19 +2,20 @@ package pl.kedziorek.liquorganizer.user.dto;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import pl.kedziorek.liquorganizer.role.dto.Role;
-import pl.kedziorek.liquorganizer.role.repository.RoleRepo;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -69,6 +70,8 @@ public class User {
     private Boolean deleted;
 
     private Boolean enabled;
+
+    private String confirmationToken;
 
     @Override
     public boolean equals(Object o) {

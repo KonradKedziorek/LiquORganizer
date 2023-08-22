@@ -67,4 +67,12 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="add-confirmation-token-filed-in-user-entity" author="Konrad Kedziorek">
+        <addColumn tableName="user">
+            <column name="confirmation_token" type="text">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

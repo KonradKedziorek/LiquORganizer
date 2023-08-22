@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kedziorek.liquorganizer.config.exception.ResourceNotFoundException;
 import pl.kedziorek.liquorganizer.config.security.AuthResponse;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 public class AuthenticationServiceImpl implements AuthService {
     private final UserService userService;
     private final UserRepo userRepo;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final AuthenticationProviderService authenticationProviderService;
     private final JwtUtils jwtUtils;
 
@@ -37,8 +38,9 @@ public class AuthenticationServiceImpl implements AuthService {
     public AuthResponse authenticate(Credentials credentials) throws IllegalAccessException {
         User user = userService.getUser(credentials.getUsername());
         String password = credentials.getPassword();
-        if(user!=null && (bCryptPasswordEncoder.matches(password,
-                user.getPassword()))){
+        if(user!=null
+                && (passwordEncoder.matches(password, user.getPassword()))
+                && Boolean.TRUE.equals(user.getEnabled())){
             Authentication authentication = databaseAuthenticate(credentials);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtils.generateJwtToken(authentication);

@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.kedziorek.liquorganizer.config.security.AuthResponse;
 import pl.kedziorek.liquorganizer.config.security.Credentials;
 import pl.kedziorek.liquorganizer.config.security.service.AuthService;
@@ -60,5 +57,10 @@ public class UserController {
     @PostMapping("/signUp")
     public ResponseEntity<User> signUp(@Valid @RequestBody RegistrationRequest request) {
         return ResponseEntity.ok().body(userService.signUp(request));
+    }
+
+    @PutMapping("/confirmAccount/token={token}")
+    public ResponseEntity<User> confirmAccount(@PathVariable String token) {
+        return ResponseEntity.ok().body(userService.confirmAccount(token));
     }
 }
