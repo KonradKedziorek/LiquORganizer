@@ -7,12 +7,14 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.context.SecurityContextHolder;
+import pl.kedziorek.liquorganizer.comment.dto.Comment;
 import pl.kedziorek.liquorganizer.liquor.LiquorType;
 import pl.kedziorek.liquorganizer.utils.CustomConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -73,6 +75,9 @@ public class Liquor {
     private LocalDateTime modifiedAt;
 
     private Boolean deleted;
+
+    @OneToMany(mappedBy = "liquor")
+    private List<Comment> comments;
 
     @Override
     public boolean equals(Object o) {

@@ -75,4 +75,43 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="add-reset-passwordT-token-filed-in-user-entity" author="Konrad Kedziorek">
+        <addColumn tableName="user">
+            <column name="reset_password_token" type="text">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add-comment-table" author="Konrad Kędziorek">
+        <createTable tableName="comment">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified_at" type="datetime" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="content" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="liquor_id" type="uuid">
+                <constraints foreignKeyName="liquor_id_in_comment_fk"
+                             referencedTableName="liquor"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

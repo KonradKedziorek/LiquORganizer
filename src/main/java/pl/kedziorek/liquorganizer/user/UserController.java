@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.kedziorek.liquorganizer.config.security.AuthResponse;
 import pl.kedziorek.liquorganizer.config.security.Credentials;
 import pl.kedziorek.liquorganizer.config.security.service.AuthService;
+import pl.kedziorek.liquorganizer.user.dto.ChangeUserRolesRequest;
 import pl.kedziorek.liquorganizer.user.dto.RegistrationRequest;
 import pl.kedziorek.liquorganizer.user.dto.User;
 import pl.kedziorek.liquorganizer.user.service.UserService;
@@ -17,6 +18,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import java.util.UUID;
 
 import static pl.kedziorek.liquorganizer.utils.Cookie.buildCookie;
 
@@ -62,5 +65,12 @@ public class UserController {
     @PutMapping("/confirmAccount/token={token}")
     public ResponseEntity<User> confirmAccount(@PathVariable String token) {
         return ResponseEntity.ok().body(userService.confirmAccount(token));
+    }
+
+    @PutMapping("/uuid={uuid}/role/changeUserRoles")
+    public ResponseEntity<?> changeUserRoles(
+            @RequestBody ChangeUserRolesRequest changeUserRolesRequest,
+            @PathVariable UUID uuid) {
+        return ResponseEntity.ok().body(userService.changeUserRoles(changeUserRolesRequest, uuid));
     }
 }

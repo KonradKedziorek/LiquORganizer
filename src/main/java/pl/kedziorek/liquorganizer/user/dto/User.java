@@ -56,7 +56,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @CreatedBy
-    private String createdBy; //kiedy uzytkownik bedzie sie logowal to mozna jebnac tu jakies "REGISTRATION"
+    private String createdBy;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -72,6 +72,8 @@ public class User {
     private Boolean enabled;
 
     private String confirmationToken;
+
+    private String resetPasswordToken;
 
     @Override
     public boolean equals(Object o) {

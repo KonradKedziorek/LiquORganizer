@@ -20,6 +20,8 @@ import java.util.UUID;
 @Slf4j
 public class RoleServiceImpl implements RoleService {
     private final RoleRepo roleRepo;
+    private static final String ROLE_EDIT_MSG = "Editing role (name = {})";
+    private static final String ROLE_SAVE_MSG = "Saving new role (name = {})";
 
     @Override
     public Role saveOrUpdateRole(RoleRequest roleRequest) {
@@ -35,12 +37,12 @@ public class RoleServiceImpl implements RoleService {
                         "Role with id '" + roleRequest.getId() + "' not found in database")
                 );
 
-        log.info("Editing role (name = {})", roleRequest.getName());
+        log.info(ROLE_EDIT_MSG, roleRequest.getName());
         return roleRepo.save(changeProperties(roleRequest, role));
     }
 
     private Role saveRole(RoleRequest roleRequest) {
-        log.info("Saving new role (name = {})", roleRequest.getName());
+        log.info(ROLE_SAVE_MSG, roleRequest.getName());
         return roleRepo.save(Role.mapToRole(roleRequest));
     }
 

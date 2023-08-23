@@ -3,13 +3,14 @@ package pl.kedziorek.liquorganizer.user.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kedziorek.liquorganizer.config.exception.IllicitOperationException;
 import pl.kedziorek.liquorganizer.config.exception.ResourceNotFoundException;
 import pl.kedziorek.liquorganizer.email.EmailService;
+import pl.kedziorek.liquorganizer.role.dto.Role;
 import pl.kedziorek.liquorganizer.role.repository.RoleRepo;
+import pl.kedziorek.liquorganizer.user.dto.ChangeUserRolesRequest;
 import pl.kedziorek.liquorganizer.user.dto.RegistrationRequest;
 import pl.kedziorek.liquorganizer.user.dto.User;
 import pl.kedziorek.liquorganizer.user.repository.UserRepo;
@@ -17,6 +18,7 @@ import pl.kedziorek.liquorganizer.utils.JwtUtils;
 
 import javax.transaction.Transactional;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -68,5 +70,15 @@ public class UserServiceImpl implements UserService {
             throw new IllicitOperationException(USER_ALREADY_ENABLED);
         }
         return userRepo.save(user);
+    }
+
+    @Override
+    public User changeUserRoles(ChangeUserRolesRequest changeUserRolesRequest, UUID id) {
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND_MSG));
+        Set<Role> newRoles = roleRepo.findRolesByNameIn(changeUserRolesRequest.getRoles())
+                .orElseThrow(() -> new ResourceNotFoundException(ROLE_NOT_FOUND_MSG));
+        user.setRoles(newRoles);
+        return user;
     }
 }
